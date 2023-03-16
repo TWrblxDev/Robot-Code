@@ -3,6 +3,7 @@
 // the WPILib BSD license file in the root directory of this project.
 
 #include <iostream>
+#include "mapping.h"
 using namespace std;
 #include <frc/Joystick.h>
 #include <frc/TimedRobot.h>
@@ -13,13 +14,7 @@ using namespace std;
 #include <frc/XboxController.h>
 #include <ctre/phoenix/motorcontrol/can/VictorSPX.h>
 #include <ctre/phoenix/motorcontrol/can/TalonSRX.h>
-#define FEED_BUTTON 1
-#define S_LEFT_DRIVE 1
-#define S_RIGHT_DRIVE 1
-#define ARM_MOTOR_BTN 1 
-#define ARM_CAN_LOW_NUM 10
-#define ARM_CAN_HIGH_NUM 11
-#define ARM_LOW_DRIVE 1
+
 
 
 
@@ -87,7 +82,7 @@ class Robot : public frc::TimedRobot {
   // Read the joystick, calculate the drive stuff
   double x = m_stick.GetX();  // In terms of arcade drive, this is speed
   double y = m_stick.GetY();  // In terms of arcade drive, this is turn
-  
+
   // Drive Powers
   // Note if Wheels Invert
   // Flip the y - x and the y + x around
@@ -113,15 +108,14 @@ class Robot : public frc::TimedRobot {
   bool lastBumper;
   double lastBumperRB;
   bool c_stick_rb_press = ControllerX.GetRightBumper();
-    if (c_stick_rb_press != lastBumper) {
-    lastBumper = c_stick_rb_press;
-
-    if (c_stick_rb_press) {
+   if (c_stick_rb_press != lastBumper) {
+   lastBumper = c_stick_rb_press;
+if (c_stick_rb_press) {
     a_lowMotor.Set(ctre::phoenix::motorcontrol::TalonSRXControlMode::PercentOutput, lastBumper * ARM_LOW_DRIVE );
     } else {
      std::cout << "Bumper off" << "\n";
     }
- }
+  }
 
   // Update the Trigger and stuff
   bool trigger = m_stick.GetTrigger();
