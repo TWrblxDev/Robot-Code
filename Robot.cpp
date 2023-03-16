@@ -87,6 +87,10 @@ class Robot : public frc::TimedRobot {
   // Read the joystick, calculate the drive stuff
   double x = m_stick.GetX();  // In terms of arcade drive, this is speed
   double y = m_stick.GetY();  // In terms of arcade drive, this is turn
+  
+  // Drive Powers
+  // Note if Wheels Invert
+  // Flip the y - x and the y + x around
 
   double leftPower = (y - x) / 2;
   double rightPower = (y + x) / 2;
@@ -105,6 +109,7 @@ class Robot : public frc::TimedRobot {
     m_rightMotor.Set(ctre::phoenix::motorcontrol::VictorSPXControlMode::PercentOutput, rightPower * S_RIGHT_DRIVE);
     lastDriveRight = rightPower;
   }
+  // Arm Lower Motor Xbox Controller Handler
   bool lastBumper;
   double lastBumperRB;
   bool c_stick_rb_press = ControllerX.GetRightBumper();
